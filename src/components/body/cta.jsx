@@ -4,13 +4,18 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import phone from "../../assets/images/phone-download.png";
 import apple from "../../assets/icons/apple.png";
 import google from "../../assets/icons/google.png";
 
 export default function CTASection() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <Box sx={{ flexGrow: 1, my: 20, mx: 13 }}>
+    <Box sx={{ flexGrow: 1, my: isMobile ? 10 : 20, mx: isMobile ? 4 : 13 }}>
       <Grid
         container
         direction="row"

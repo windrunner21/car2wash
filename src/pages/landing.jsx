@@ -3,10 +3,10 @@ import Box from "@mui/material/Box";
 import NavigationBar from "../components/navigation/bar";
 import HeroSection from "../components/body/hero";
 import FeatureSection from "../components/body/feature";
-import Divider from "@mui/material/Divider";
 import CTASection from "../components/body/cta";
 import CTASection2 from "../components/body/cta-2";
 import NewsletterSection from "../components/body/newsletter";
+import Footer from "../components/navigation/footer";
 
 export default function LandingPage() {
   return (
@@ -14,11 +14,30 @@ export default function LandingPage() {
       <NavigationBar />
       <HeroSection />
       <FeatureSection />
-      <Divider sx={{ mx: 50 }} />
+      <hr
+        style={{
+          width: "65%",
+          textAlign: "center",
+          backgroundColor: "#e2e2e2",
+          color: "#e2e2e2",
+          height: "1px",
+          borderWidth: 0,
+        }}
+      />
       <CTASection />
       <CTASection2 />
-      <Divider sx={{ mx: 50 }} />
+      <hr
+        style={{
+          width: "65%",
+          textAlign: "center",
+          backgroundColor: "#e2e2e2",
+          color: "#e2e2e2",
+          height: "1px",
+          borderWidth: 0,
+        }}
+      />
       <NewsletterSection />
+      <Footer />
     </Box>
   );
 }

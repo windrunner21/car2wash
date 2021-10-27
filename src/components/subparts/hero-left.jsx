@@ -5,11 +5,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Icon from "@mui/icons-material/BlurOn";
 import Time from "@mui/icons-material/Schedule";
-import useWindowDimensions from "../misc/window-dimensions";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function HeroLeft() {
-  // eslint-disable-next-line no-unused-vars
-  const { height, width } = useWindowDimensions();
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box m="auto">
@@ -40,7 +42,13 @@ export default function HeroLeft() {
           </Grid>
         </Grid>
         <Grid item sx={{ marginTop: 3 }}>
-          <Typography sx={{ color: "black", fontWeight: 700, fontSize: 70 }}>
+          <Typography
+            sx={{
+              color: "black",
+              fontWeight: 700,
+              fontSize: isMobile ? 50 : 70,
+            }}
+          >
             Life Should
           </Typography>
         </Grid>
@@ -48,12 +56,16 @@ export default function HeroLeft() {
           <Grid container direction="row" alignItems="flex-end" spacing={15}>
             <Grid item>
               <Typography
-                sx={{ color: "black", fontWeight: 700, fontSize: 70 }}
+                sx={{
+                  color: "black",
+                  fontWeight: 700,
+                  fontSize: isMobile ? 50 : 70,
+                }}
               >
                 Be Easy.
               </Typography>
             </Grid>
-            {width < 900 ? (
+            {isTablet ? (
               <div />
             ) : (
               <Grid item>
@@ -62,7 +74,7 @@ export default function HeroLeft() {
             )}
           </Grid>
         </Grid>
-        <Grid item sx={{ width: "60%" }}>
+        <Grid item sx={{ width: isMobile ? "100%" : "60%" }}>
           <Typography sx={{ color: "gray", fontWeight: 400, fontSize: 20 }}>
             book a place at any car wash using a mobile device and save time.
           </Typography>

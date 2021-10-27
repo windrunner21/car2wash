@@ -2,13 +2,18 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import feature1 from "../../assets/images/feature-1.png";
 import feature2 from "../../assets/images/feature-2.png";
 import feature3 from "../../assets/images/feature-3.png";
 
 export default function FeatureSection() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <Box sx={{ flexGrow: 1, my: 16, mx: 13 }}>
+    <Box sx={{ flexGrow: 1, my: isMobile ? 10 : 20, mx: isMobile ? 4 : 13 }}>
       <Grid
         container
         direction="column"
@@ -16,11 +21,18 @@ export default function FeatureSection() {
         alignItems="center"
       >
         <Grid item>
-          <Typography sx={{ color: "black", fontWeight: 600, fontSize: 50 }}>
+          <Typography
+            sx={{
+              color: "black",
+              fontWeight: 600,
+              fontSize: isMobile ? 45 : 50,
+            }}
+          >
             How it works
           </Typography>
         </Grid>
-        <Grid item sx={{ width: "25%" }}>
+
+        <Grid item sx={{ width: isMobile ? "100%" : "25%" }}>
           <Typography
             sx={{
               color: "gray",
@@ -43,7 +55,7 @@ export default function FeatureSection() {
         sx={{ marginTop: 5 }}
         spacing={10}
       >
-        <Grid item xs={6} sm={6} md={4} lg={3} xl={2.5}>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2.5}>
           <Grid
             container
             direction="column"
@@ -79,7 +91,7 @@ export default function FeatureSection() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={6} sm={6} md={4} lg={3} xl={2.5}>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2.5}>
           <Grid
             container
             direction="column"
@@ -110,7 +122,7 @@ export default function FeatureSection() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={6} sm={6} md={4} lg={3} xl={2.5}>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2.5}>
           <Grid
             container
             direction="column"

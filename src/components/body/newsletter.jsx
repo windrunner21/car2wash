@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function NewsletterSection() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [helperError, setHelperError] = useState(false);
+  const [email, setEmail] = useState("");
+
+  // check whether email is correct
+  const enterEmail = (email) => {
+    let re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (re.test(email)) {
+      console.log("valid");
+      setHelperError(false);
+      setEmail(email);
+    } else {
+      setHelperError(true);
+      console.log("invalid");
+    }
+  };
+
+  const getInvitationPressed = () => {
+    console.log(email);
+    if (email === "") {
+      setHelperError(true);
+    }
+  };
+
   return (
-    <Box sx={{ flexGrow: 1, my: 10, mx: 13 }}>
+    <Box sx={{ flexGrow: 1, my: 10, mx: isMobile ? 4 : 13 }}>
       <Grid
         container
         direction="column"
@@ -52,7 +81,11 @@ export default function NewsletterSection() {
               <TextField
                 id="email-invitation"
                 variant="outlined"
+                name="email"
+                autoComplete="email"
                 placeholder="Enter your email"
+                error={helperError}
+                helperText={helperError ? "Enter valid email address." : ""}
                 sx={{
                   input: {
                     "&::placeholder": {
@@ -72,10 +105,12 @@ export default function NewsletterSection() {
                     padding: 0.4,
                   },
                 }}
+                onChange={(event) => enterEmail(event.target.value)}
               />
             </Grid>
             <Grid item>
               <Button
+                onClick={() => getInvitationPressed()}
                 sx={{
                   backgroundColor: "black",
                   color: "white",

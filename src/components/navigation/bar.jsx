@@ -35,7 +35,7 @@ export default function NavigationBar() {
       <AppBar
         position="static"
         elevation={0}
-        sx={{ backgroundColor: "white", py: 2, px: 10 }}
+        sx={{ backgroundColor: "white", py: 2, px: isMobile ? 0 : 10 }}
       >
         <Toolbar>
           <Grid
@@ -76,7 +76,7 @@ export default function NavigationBar() {
                   open={drawerState}
                   onClose={() => setDrawerState(false)}
                 >
-                  <List sx={{ px: 12 }}>
+                  <List>
                     <ListItem
                       sx={{ py: 5 }}
                       secondaryAction={
