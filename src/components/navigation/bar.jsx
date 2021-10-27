@@ -14,6 +14,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
+import Tooltip from "@mui/material/Tooltip";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -21,7 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function NavigationBar() {
+export default function NavigationBar(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [drawerState, setDrawerState] = useState(false);
@@ -29,6 +30,13 @@ export default function NavigationBar() {
   const openDrawer = () => {
     setDrawerState(true);
   };
+
+  const executeBusinessScroll = () =>
+    props.businessRef.current.scrollIntoView({ behavior: "smooth" });
+  const executeFeaturesScroll = () =>
+    props.featuresRef.current.scrollIntoView({ behavior: "smooth" });
+  const executeDownloadScroll = () =>
+    props.downloadRef.current.scrollIntoView({ behavior: "smooth" });
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -46,6 +54,9 @@ export default function NavigationBar() {
           >
             <Grid item sx={{ flexGrow: 1 }}>
               <Button
+                onClick={() =>
+                  window.open("http://192.168.0.100:3000", "_self")
+                }
                 sx={{
                   color: "black",
                   fontSize: 24,
@@ -88,25 +99,40 @@ export default function NavigationBar() {
                           />
                         </IconButton>
                       }
-                    ></ListItem>
+                    />
                     <ListItem disablePadding>
-                      <ListItemButton>
+                      <ListItemButton
+                        onClick={() => {
+                          executeBusinessScroll();
+                          setDrawerState(false);
+                        }}
+                      >
                         <ListItemText primary="Business" />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                       <ListItemButton>
-                        <ListItemText primary="Pricing" />
+                        <ListItemText primary="Pricing (Free Beta Access 🍾)" />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
-                      <ListItemButton>
+                      <ListItemButton
+                        onClick={() => {
+                          executeFeaturesScroll();
+                          setDrawerState(false);
+                        }}
+                      >
                         <ListItemText primary="Features" />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
-                      <ListItemButton>
-                        <ListItemText primary="About" />
+                      <ListItemButton
+                        onClick={() => {
+                          executeDownloadScroll();
+                          setDrawerState(false);
+                        }}
+                      >
+                        <ListItemText primary="Download" />
                       </ListItemButton>
                     </ListItem>
                     <Divider />
@@ -134,6 +160,7 @@ export default function NavigationBar() {
                   >
                     <Grid item>
                       <Button
+                        onClick={executeBusinessScroll}
                         sx={{
                           color: "gray",
                           fontSize: 17,
@@ -149,23 +176,26 @@ export default function NavigationBar() {
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Button
-                        sx={{
-                          color: "gray",
-                          fontWeight: 500,
-                          fontSize: 17,
-                          textTransform: "none",
-                          ":hover": {
-                            color: "black",
-                            backgroundColor: "transparent",
-                          },
-                        }}
-                      >
-                        Pricing
-                      </Button>
+                      <Tooltip title="Free Beta Access 🍾" placement="bottom">
+                        <Button
+                          sx={{
+                            color: "gray",
+                            fontWeight: 500,
+                            fontSize: 17,
+                            textTransform: "none",
+                            ":hover": {
+                              color: "black",
+                              backgroundColor: "transparent",
+                            },
+                          }}
+                        >
+                          Pricing
+                        </Button>
+                      </Tooltip>
                     </Grid>
                     <Grid item>
                       <Button
+                        onClick={executeFeaturesScroll}
                         sx={{
                           color: "gray",
                           fontWeight: 500,
@@ -182,6 +212,7 @@ export default function NavigationBar() {
                     </Grid>
                     <Grid item>
                       <Button
+                        onClick={executeDownloadScroll}
                         sx={{
                           color: "gray",
                           fontWeight: 500,
@@ -193,7 +224,7 @@ export default function NavigationBar() {
                           },
                         }}
                       >
-                        About
+                        Download
                       </Button>
                     </Grid>
                   </Grid>

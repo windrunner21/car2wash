@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Box from "@mui/material/Box";
 import NavigationBar from "../components/navigation/bar";
 import HeroSection from "../components/body/hero";
@@ -9,10 +9,20 @@ import NewsletterSection from "../components/body/newsletter";
 import Footer from "../components/navigation/footer";
 
 export default function LandingPage() {
+  const businessRef = useRef(null);
+  const downloadRef = useRef(null);
+  const featuresRef = useRef(null);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <NavigationBar />
-      <HeroSection />
+      <NavigationBar
+        businessRef={businessRef}
+        downloadRef={downloadRef}
+        featuresRef={featuresRef}
+      />
+      <div ref={businessRef}>
+        <HeroSection />
+      </div>
       <FeatureSection />
       <hr
         style={{
@@ -24,8 +34,12 @@ export default function LandingPage() {
           borderWidth: 0,
         }}
       />
-      <CTASection />
-      <CTASection2 />
+      <div ref={downloadRef}>
+        <CTASection />
+      </div>
+      <div ref={featuresRef}>
+        <CTASection2 />
+      </div>
       <hr
         style={{
           width: "65%",
