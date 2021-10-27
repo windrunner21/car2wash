@@ -12,6 +12,7 @@ export default function LandingPage() {
   const businessRef = useRef(null);
   const downloadRef = useRef(null);
   const featuresRef = useRef(null);
+  const emailTextFieldRef = useRef(null);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -21,7 +22,7 @@ export default function LandingPage() {
         featuresRef={featuresRef}
       />
       <div ref={businessRef}>
-        <HeroSection />
+        <HeroSection emailRef={emailTextFieldRef} />
       </div>
       <FeatureSection />
       <hr
@@ -38,7 +39,7 @@ export default function LandingPage() {
         <CTASection />
       </div>
       <div ref={featuresRef}>
-        <CTASection2 />
+        <CTASection2 emailRef={emailTextFieldRef} />
       </div>
       <hr
         style={{
@@ -50,7 +51,7 @@ export default function LandingPage() {
           borderWidth: 0,
         }}
       />
-      <NewsletterSection />
+      <NewsletterSection emailRef={emailTextFieldRef} />
       <Footer />
     </Box>
   );

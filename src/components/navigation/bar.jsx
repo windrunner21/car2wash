@@ -138,12 +138,12 @@ export default function NavigationBar(props) {
                     <Divider />
                     <ListItem disablePadding>
                       <ListItemButton>
-                        <ListItemText primary="Log in" />
+                        <ListItemText primary="Log in (Coming Soon 🔜)" />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                       <ListItemButton>
-                        <ListItemText primary="Sign up" />
+                        <ListItemText primary="Sign up (Coming Soon 🔜)" />
                       </ListItemButton>
                     </ListItem>
                   </List>
@@ -237,41 +237,45 @@ export default function NavigationBar(props) {
                     spacing={2}
                   >
                     <Grid item>
-                      <Button
-                        sx={{
-                          color: "black",
-                          fontSize: 17,
-                          fontWeight: 500,
-                          textTransform: "none",
-                          ":hover": {
-                            color: "gray",
-                            backgroundColor: "transparent",
-                          },
-                        }}
-                      >
-                        Log in
-                      </Button>
+                      <Tooltip title="Coming Soon 🔜" placement="bottom">
+                        <Button
+                          sx={{
+                            color: "black",
+                            fontSize: 17,
+                            fontWeight: 500,
+                            textTransform: "none",
+                            ":hover": {
+                              color: "gray",
+                              backgroundColor: "transparent",
+                            },
+                          }}
+                        >
+                          Log in
+                        </Button>
+                      </Tooltip>
                     </Grid>
                     <Grid item>
-                      <Button
-                        sx={{
-                          backgroundColor: "black",
-                          color: "white",
-                          fontWeight: 500,
-                          fontSize: 17,
-                          textTransform: "none",
-                          borderRadius: 4,
-                          py: 2,
-                          px: 4,
-                          ":hover": {
-                            border: "1px solid black",
-                            color: "black",
-                            backgroundColor: "transparent",
-                          },
-                        }}
-                      >
-                        Sign up
-                      </Button>
+                      <Tooltip title="Coming Soon 🔜" placement="bottom">
+                        <Button
+                          sx={{
+                            backgroundColor: "black",
+                            color: "white",
+                            fontWeight: 500,
+                            fontSize: 17,
+                            textTransform: "none",
+                            borderRadius: 4,
+                            py: 2,
+                            px: 4,
+                            ":hover": {
+                              border: "1px solid black",
+                              color: "black",
+                              backgroundColor: "transparent",
+                            },
+                          }}
+                        >
+                          Sign up
+                        </Button>
+                      </Tooltip>
                     </Grid>
                   </Grid>
                 </Grid>

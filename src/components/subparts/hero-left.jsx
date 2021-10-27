@@ -8,10 +8,13 @@ import Time from "@mui/icons-material/Schedule";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-export default function HeroLeft() {
+export default function HeroLeft(props) {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const focusTextField = () =>
+    props.emailRef.current.scrollIntoView({ behavior: "smooth" });
 
   return (
     <Box m="auto">
@@ -81,6 +84,7 @@ export default function HeroLeft() {
         </Grid>
         <Grid item sx={{ marginTop: 10 }}>
           <Button
+            onClick={focusTextField}
             sx={{
               backgroundColor: "black",
               color: "white",

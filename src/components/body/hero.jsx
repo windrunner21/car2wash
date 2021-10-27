@@ -6,7 +6,7 @@ import HeroRight from "../subparts/hero-right";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-export default function HeroSection() {
+export default function HeroSection(props) {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down("xl"));
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -31,7 +31,7 @@ export default function HeroSection() {
               py: isMobile ? 2 : 6,
             }}
           >
-            <HeroLeft />
+            <HeroLeft emailRef={props.emailRef} />
           </Box>
         </Grid>
         {isTablet ? (

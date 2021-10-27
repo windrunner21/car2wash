@@ -7,9 +7,13 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import phone from "../../assets/images/phone-connect.png";
 
-export default function CTASection2() {
+export default function CTASection2(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const focusTextField = () =>
+    props.emailRef.current.scrollIntoView({ behavior: "smooth" });
+
   return (
     <Box sx={{ flexGrow: 1, my: isMobile ? 10 : 20, mx: isMobile ? 4 : 13 }}>
       <Grid
@@ -49,6 +53,7 @@ export default function CTASection2() {
             </Grid>
             <Grid item>
               <Button
+                onClick={focusTextField}
                 sx={{
                   my: 2,
                   border: "2px solid #bdbdbd",

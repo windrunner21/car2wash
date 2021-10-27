@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-export default function NewsletterSection() {
+export default function NewsletterSection(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [helperError, setHelperError] = useState(false);
@@ -86,6 +86,7 @@ export default function NewsletterSection() {
                 placeholder="Enter your email"
                 error={helperError}
                 helperText={helperError ? "Enter valid email address." : ""}
+                ref={props.emailRef}
                 sx={{
                   input: {
                     "&::placeholder": {
