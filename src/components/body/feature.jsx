@@ -7,10 +7,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import feature1 from "../../assets/images/feature-1.png";
 import feature2 from "../../assets/images/feature-2.png";
 import feature3 from "../../assets/images/feature-3.png";
+import { useTranslation } from "react-i18next";
 
 export default function FeatureSection() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { t } = useTranslation();
 
   return (
     <Box sx={{ flexGrow: 1, my: isMobile ? 10 : 20, mx: isMobile ? 4 : 13 }}>
@@ -26,9 +28,10 @@ export default function FeatureSection() {
               color: "black",
               fontWeight: 600,
               fontSize: isMobile ? 45 : 50,
+              textAlign: "center",
             }}
           >
-            How it works
+            {t("feature.title")}
           </Typography>
         </Grid>
 
@@ -41,8 +44,7 @@ export default function FeatureSection() {
               textAlign: "center",
             }}
           >
-            We value your time and comfort highly and believe in simplicity of
-            routines
+            {t("feature.subtitle")}
           </Typography>
         </Grid>
       </Grid>
@@ -73,7 +75,7 @@ export default function FeatureSection() {
                   fontSize: 35,
                 }}
               >
-                Booking
+                {t("feature.booking")}
               </Typography>
             </Grid>
             <Grid item>
@@ -85,8 +87,7 @@ export default function FeatureSection() {
                   textAlign: "center",
                 }}
               >
-                Choose a car wash, comfortable time, date and you are good to
-                go!
+                {t("feature.bookingText")}
               </Typography>
             </Grid>
           </Grid>
@@ -105,7 +106,7 @@ export default function FeatureSection() {
               <Typography
                 sx={{ color: "black", fontWeight: 600, fontSize: 35 }}
               >
-                Tracking
+                {t("feature.tracking")}
               </Typography>
             </Grid>
             <Grid item>
@@ -117,7 +118,7 @@ export default function FeatureSection() {
                   textAlign: "center",
                 }}
               >
-                Get updated on any booking changes or updates immediately.
+                {t("feature.trackingText")}
               </Typography>
             </Grid>
           </Grid>
@@ -136,7 +137,7 @@ export default function FeatureSection() {
               <Typography
                 sx={{ color: "black", fontWeight: 600, fontSize: 35 }}
               >
-                Washing
+                {t("feature.washing")}
               </Typography>
             </Grid>
             <Grid item>
@@ -148,8 +149,7 @@ export default function FeatureSection() {
                   textAlign: "center",
                 }}
               >
-                Drive to the booked place and time, have your car washed
-                instantly.
+                {t("feature.washingText")}
               </Typography>
             </Grid>
           </Grid>

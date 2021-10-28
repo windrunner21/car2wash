@@ -6,10 +6,12 @@ import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import phone from "../../assets/images/phone-connect.png";
+import { useTranslation } from "react-i18next";
 
 export default function CTASection2(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { t } = useTranslation();
 
   const focusTextField = () =>
     props.emailRef.current.scrollIntoView({ behavior: "smooth" });
@@ -35,7 +37,7 @@ export default function CTASection2(props) {
               <Typography
                 sx={{ color: "black", fontWeight: 600, fontSize: 50 }}
               >
-                Connecting you to all car washes
+                {t("cta.title2")}
               </Typography>
             </Grid>
             <Grid item sx={{ width: "80%" }}>
@@ -47,8 +49,7 @@ export default function CTASection2(props) {
                   my: 4,
                 }}
               >
-                Explore new places to wash a car remotely. Filter by rating.
-                Book a slot. Everything from your smartphone.
+                {t("cta.subtitle2")}
               </Typography>
             </Grid>
             <Grid item>
@@ -72,7 +73,7 @@ export default function CTASection2(props) {
                   },
                 }}
               >
-                Get Started
+                {t("cta.button2")}
               </Button>
             </Grid>
           </Grid>

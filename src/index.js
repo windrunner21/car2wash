@@ -5,6 +5,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingPage from "./pages/landing";
+import "./i18n";
 
 const theme = createTheme({
   typography: {

@@ -19,6 +19,13 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTranslation } from "react-i18next";
+
+const lngs = {
+  az: { nativeName: "🇦🇿 Azerbaijani", nativeNameMobile: "🇦🇿 AZ" },
+  en: { nativeName: "🇺🇸 English", nativeNameMobile: "🇺🇸 EN" },
+  ru: { nativeName: "🇷🇺 Russian", nativeNameMobile: "🇷🇺 RU" },
+};
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -27,6 +34,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function NavigationBar(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  const { t, i18n } = useTranslation();
   const [drawerState, setDrawerState] = useState(false);
   const [langHovered, setLangHovered] = useState(false);
 
@@ -122,12 +130,16 @@ export default function NavigationBar(props) {
                           setDrawerState(false);
                         }}
                       >
-                        <ListItemText primary="Business" />
+                        <ListItemText primary={t("navbar.business")} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                       <ListItemButton>
-                        <ListItemText primary="Pricing (Free Beta Access 🍾)" />
+                        <ListItemText
+                          primary={`${t("navbar.pricing")} (${t(
+                            "navbar.beta"
+                          )})`}
+                        />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -137,7 +149,7 @@ export default function NavigationBar(props) {
                           setDrawerState(false);
                         }}
                       >
-                        <ListItemText primary="Features" />
+                        <ListItemText primary={t("navbar.features")} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -147,18 +159,24 @@ export default function NavigationBar(props) {
                           setDrawerState(false);
                         }}
                       >
-                        <ListItemText primary="Download" />
+                        <ListItemText primary={t("navbar.download")} />
                       </ListItemButton>
                     </ListItem>
                     <Divider variant="middle" />
                     <ListItem disablePadding>
                       <ListItemButton>
-                        <ListItemText primary="Log in (Coming Soon 🔜)" />
+                        <ListItemText
+                          primary={`${t("navbar.logIn")} (${t("navbar.soon")})`}
+                        />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                       <ListItemButton>
-                        <ListItemText primary="Sign up (Coming Soon 🔜)" />
+                        <ListItemText
+                          primary={`${t("navbar.signUp")} (${t(
+                            "navbar.soon"
+                          )})`}
+                        />
                       </ListItemButton>
                     </ListItem>
                     <ListItem
@@ -175,27 +193,23 @@ export default function NavigationBar(props) {
                         justifyContent="space-between"
                         alignItems="center"
                       >
-                        <Grid item>
-                          <Button
-                            sx={{ backgroundColor: "#ececee", color: "black" }}
-                          >
-                            🇦🇿 AZ
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button
-                            sx={{ backgroundColor: "#ececee", color: "black" }}
-                          >
-                            🇺🇸 EN
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button
-                            sx={{ backgroundColor: "#ececee", color: "black" }}
-                          >
-                            🇷🇺 RU
-                          </Button>
-                        </Grid>
+                        {Object.keys(lngs).map((lng) => (
+                          <Grid item key={lng}>
+                            <Button
+                              onClick={() => {
+                                i18n.changeLanguage(lng);
+                                setLangHovered(false);
+                                setAnchorEl(null);
+                              }}
+                              sx={{
+                                backgroundColor: "#ececee",
+                                color: "black",
+                              }}
+                            >
+                              {lngs[lng].nativeNameMobile}
+                            </Button>
+                          </Grid>
+                        ))}
                       </Grid>
                     </ListItem>
                   </List>
@@ -224,11 +238,11 @@ export default function NavigationBar(props) {
                           },
                         }}
                       >
-                        Business
+                        {t("navbar.business")}
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Tooltip title="Free Beta Access 🍾" placement="bottom">
+                      <Tooltip title={t("navbar.beta")} placement="bottom">
                         <Button
                           sx={{
                             color: "gray",
@@ -241,7 +255,7 @@ export default function NavigationBar(props) {
                             },
                           }}
                         >
-                          Pricing
+                          {t("navbar.pricing")}
                         </Button>
                       </Tooltip>
                     </Grid>
@@ -259,7 +273,7 @@ export default function NavigationBar(props) {
                           },
                         }}
                       >
-                        Features
+                        {t("navbar.features")}
                       </Button>
                     </Grid>
                     <Grid item>
@@ -276,7 +290,7 @@ export default function NavigationBar(props) {
                           },
                         }}
                       >
-                        Download
+                        {t("navbar.download")}
                       </Button>
                     </Grid>
                     <Grid item>
@@ -295,9 +309,10 @@ export default function NavigationBar(props) {
                           },
                         }}
                       >
-                        Language
+                        {t("navbar.language")}
                       </Button>
                       <Menu
+                        disableAutoFocusItem
                         id="basic-menu"
                         anchorEl={anchorEl}
                         open={open}
@@ -307,11 +322,18 @@ export default function NavigationBar(props) {
                           onMouseLeave: handleClose,
                         }}
                       >
-                        <MenuItem onClick={handleClose}>
-                          🇦🇿 Azerbaijani
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>🇺🇸 English</MenuItem>
-                        <MenuItem onClick={handleClose}>🇷🇺 Russian</MenuItem>
+                        {Object.keys(lngs).map((lng) => (
+                          <MenuItem
+                            key={lng}
+                            onClick={() => {
+                              i18n.changeLanguage(lng);
+                              setLangHovered(false);
+                              setAnchorEl(null);
+                            }}
+                          >
+                            {lngs[lng].nativeName}
+                          </MenuItem>
+                        ))}
                       </Menu>
                     </Grid>
                   </Grid>
@@ -324,7 +346,7 @@ export default function NavigationBar(props) {
                     spacing={2}
                   >
                     <Grid item>
-                      <Tooltip title="Coming Soon 🔜" placement="bottom">
+                      <Tooltip title={t("navbar.soon")} placement="bottom">
                         <Button
                           sx={{
                             color: "black",
@@ -338,12 +360,12 @@ export default function NavigationBar(props) {
                             },
                           }}
                         >
-                          Log in
+                          {t("navbar.logIn")}
                         </Button>
                       </Tooltip>
                     </Grid>
                     <Grid item>
-                      <Tooltip title="Coming Soon 🔜" placement="bottom">
+                      <Tooltip title={t("navbar.soon")} placement="bottom">
                         <Button
                           sx={{
                             backgroundColor: "black",
@@ -363,7 +385,7 @@ export default function NavigationBar(props) {
                             },
                           }}
                         >
-                          Sign up
+                          {t("navbar.signUp")}
                         </Button>
                       </Tooltip>
                     </Grid>

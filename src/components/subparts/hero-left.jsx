@@ -7,11 +7,13 @@ import Icon from "@mui/icons-material/BlurOn";
 import Time from "@mui/icons-material/Schedule";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTranslation } from "react-i18next";
 
 export default function HeroLeft(props) {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { t } = useTranslation();
 
   const focusTextField = () =>
     props.emailRef.current.scrollIntoView({ behavior: "smooth" });
@@ -39,7 +41,7 @@ export default function HeroLeft(props) {
               <Typography
                 sx={{ color: "black", fontWeight: 400, fontSize: 20 }}
               >
-                β Testing free trial
+                {t("hero.caption")}
               </Typography>
             </Grid>
           </Grid>
@@ -52,7 +54,7 @@ export default function HeroLeft(props) {
               fontSize: isMobile ? 50 : 70,
             }}
           >
-            Life Should
+            {t("hero.title")}
           </Typography>
         </Grid>
         <Grid item sx={{ marginBottom: 3 }}>
@@ -65,7 +67,7 @@ export default function HeroLeft(props) {
                   fontSize: isMobile ? 50 : 70,
                 }}
               >
-                Be Easy.
+                {t("hero.title2")}
               </Typography>
             </Grid>
             {isTablet ? (
@@ -79,7 +81,7 @@ export default function HeroLeft(props) {
         </Grid>
         <Grid item sx={{ width: isMobile ? "100%" : "60%" }}>
           <Typography sx={{ color: "gray", fontWeight: 400, fontSize: 20 }}>
-            book a place at any car wash using a mobile device and save time.
+            {t("hero.subtitle")}
           </Typography>
         </Grid>
         <Grid item sx={{ marginTop: 10 }}>
@@ -101,7 +103,7 @@ export default function HeroLeft(props) {
               },
             }}
           >
-            I'm interested
+            {t("hero.button")}
           </Button>
         </Grid>
       </Grid>

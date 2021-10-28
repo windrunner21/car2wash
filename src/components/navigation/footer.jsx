@@ -8,10 +8,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import instagram from "../../assets/icons/instagram.png";
 import facebook from "../../assets/icons/facebook.png";
 import twitter from "../../assets/icons/twitter.png";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -26,7 +28,7 @@ export default function Footer() {
       <Grid container direction="row" alignItems="center" spacing={2}>
         <Grid item sx={{ flexGrow: 1 }}>
           <Typography sx={{ flexGrow: 1, color: "gray", fontWeight: 300 }}>
-            Copyright © 2021 Dummy Tech LLC.
+            {t("footer.copyright")}
           </Typography>
         </Grid>
         <Grid item>

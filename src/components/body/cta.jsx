@@ -9,10 +9,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import phone from "../../assets/images/phone-download.png";
 import apple from "../../assets/icons/apple.png";
 import google from "../../assets/icons/google.png";
+import { useTranslation } from "react-i18next";
 
 export default function CTASection() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { t } = useTranslation();
 
   return (
     <Box sx={{ flexGrow: 1, my: isMobile ? 10 : 20, mx: isMobile ? 4 : 13 }}>
@@ -38,7 +40,7 @@ export default function CTASection() {
               <Typography
                 sx={{ color: "black", fontWeight: 600, fontSize: 50 }}
               >
-                Download
+                {t("cta.title1")}
               </Typography>
             </Grid>
             <Grid item sx={{ width: "80%" }}>
@@ -50,8 +52,7 @@ export default function CTASection() {
                   my: 4,
                 }}
               >
-                Download Car 2 Wash mobile app for iOS and Android. It helps you
-                washing your car smartly and removes unnecessary routine.
+                {t("cta.subtitle1")}
               </Typography>
             </Grid>
             <Grid item>

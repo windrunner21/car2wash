@@ -6,10 +6,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTranslation } from "react-i18next";
 
 export default function NewsletterSection(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { t } = useTranslation();
+
   const [helperError, setHelperError] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -52,7 +55,7 @@ export default function NewsletterSection(props) {
               textAlign: "center",
             }}
           >
-            Request β Access
+            {t("newsletter.title")}
           </Typography>
         </Grid>
         <Grid item>
@@ -65,7 +68,7 @@ export default function NewsletterSection(props) {
               my: 2,
             }}
           >
-            online reservation system for car washes
+            {t("newsletter.subtitle")}
           </Typography>
         </Grid>
         <Grid item>
@@ -83,9 +86,9 @@ export default function NewsletterSection(props) {
                 variant="outlined"
                 name="email"
                 autoComplete="email"
-                placeholder="Enter your email"
+                placeholder={t("newsletter.prompt")}
                 error={helperError}
-                helperText={helperError ? "Enter valid email address." : ""}
+                helperText={helperError ? t("newsletter.error") : ""}
                 ref={props.emailRef}
                 sx={{
                   input: {
@@ -128,7 +131,7 @@ export default function NewsletterSection(props) {
                   },
                 }}
               >
-                Get Invitation
+                {t("newsletter.button")}
               </Button>
             </Grid>
           </Grid>
