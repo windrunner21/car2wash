@@ -15,6 +15,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -26,6 +28,7 @@ export default function NavigationBar(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [drawerState, setDrawerState] = useState(false);
+  const [langHovered, setLangHovered] = useState(false);
 
   const openDrawer = () => {
     setDrawerState(true);
@@ -37,6 +40,18 @@ export default function NavigationBar(props) {
     props.featuresRef.current.scrollIntoView({ behavior: "smooth" });
   const executeDownloadScroll = () =>
     props.downloadRef.current.scrollIntoView({ behavior: "smooth" });
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setLangHovered(true);
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setLangHovered(false);
+    setAnchorEl(null);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -87,7 +102,7 @@ export default function NavigationBar(props) {
                   open={drawerState}
                   onClose={() => setDrawerState(false)}
                 >
-                  <List>
+                  <List sx={{ height: "100vh" }}>
                     <ListItem
                       sx={{ py: 5 }}
                       secondaryAction={
@@ -135,7 +150,7 @@ export default function NavigationBar(props) {
                         <ListItemText primary="Download" />
                       </ListItemButton>
                     </ListItem>
-                    <Divider />
+                    <Divider variant="middle" />
                     <ListItem disablePadding>
                       <ListItemButton>
                         <ListItemText primary="Log in (Coming Soon 🔜)" />
@@ -145,6 +160,43 @@ export default function NavigationBar(props) {
                       <ListItemButton>
                         <ListItemText primary="Sign up (Coming Soon 🔜)" />
                       </ListItemButton>
+                    </ListItem>
+                    <ListItem
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        py: 4,
+                        backgroundColor: "#f8f8fa",
+                      }}
+                    >
+                      <Grid
+                        container
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
+                        <Grid item>
+                          <Button
+                            sx={{ backgroundColor: "#ececee", color: "black" }}
+                          >
+                            🇦🇿 AZ
+                          </Button>
+                        </Grid>
+                        <Grid item>
+                          <Button
+                            sx={{ backgroundColor: "#ececee", color: "black" }}
+                          >
+                            🇺🇸 EN
+                          </Button>
+                        </Grid>
+                        <Grid item>
+                          <Button
+                            sx={{ backgroundColor: "#ececee", color: "black" }}
+                          >
+                            🇷🇺 RU
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </ListItem>
                   </List>
                 </Dialog>
@@ -227,6 +279,41 @@ export default function NavigationBar(props) {
                         Download
                       </Button>
                     </Grid>
+                    <Grid item>
+                      <Button
+                        onClick={handleClick}
+                        onMouseOver={handleClick}
+                        onMouse
+                        sx={{
+                          color: langHovered ? "black" : "gray",
+                          fontWeight: 500,
+                          fontSize: 17,
+                          textTransform: "none",
+                          ":hover": {
+                            color: "black",
+                            backgroundColor: "transparent",
+                          },
+                        }}
+                      >
+                        Language
+                      </Button>
+                      <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                          "aria-labelledby": "basic-button",
+                          onMouseLeave: handleClose,
+                        }}
+                      >
+                        <MenuItem onClick={handleClose}>
+                          🇦🇿 Azerbaijani
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>🇺🇸 English</MenuItem>
+                        <MenuItem onClick={handleClose}>🇷🇺 Russian</MenuItem>
+                      </Menu>
+                    </Grid>
                   </Grid>
                 </Grid>
                 <Grid item>
@@ -245,8 +332,9 @@ export default function NavigationBar(props) {
                             fontWeight: 500,
                             textTransform: "none",
                             ":hover": {
-                              color: "gray",
+                              // color: "gray",
                               backgroundColor: "transparent",
+                              color: "black",
                             },
                           }}
                         >
@@ -267,9 +355,11 @@ export default function NavigationBar(props) {
                             py: 2,
                             px: 4,
                             ":hover": {
-                              border: "1px solid black",
-                              color: "black",
-                              backgroundColor: "transparent",
+                              // border: "1px solid black",
+                              // color: "black",
+                              // backgroundColor: "transparent",
+                              backgroundColor: "black",
+                              color: "white",
                             },
                           }}
                         >
