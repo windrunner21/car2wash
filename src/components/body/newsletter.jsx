@@ -4,9 +4,16 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function NewsletterSection(props) {
   const theme = useTheme();
@@ -15,6 +22,15 @@ export default function NewsletterSection(props) {
 
   const [helperError, setHelperError] = useState(false);
   const [email, setEmail] = useState("");
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   // check whether email is correct
   const enterEmail = (email) => {
@@ -35,6 +51,21 @@ export default function NewsletterSection(props) {
     console.log(email);
     if (email === "") {
       setHelperError(true);
+    } else {
+      const body = {
+        email: email,
+      };
+
+      axios
+        .post(
+          "https://car2wash-dt-default-rtdb.europe-west1.firebasedatabase.app/beta-cluster.json",
+          body
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            setOpen(true);
+          }
+        });
     }
   };
 
@@ -133,6 +164,20 @@ export default function NewsletterSection(props) {
               >
                 {t("newsletter.button")}
               </Button>
+              <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity="success"
+                  sx={{ width: "100%" }}
+                >
+                  Your email was successfully received!
+                </Alert>
+              </Snackbar>
             </Grid>
           </Grid>
         </Grid>
