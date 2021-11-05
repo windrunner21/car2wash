@@ -21,7 +21,7 @@ export default function CTASection2(props) {
       <Grid
         container
         direction="row"
-        justifyContent="center"
+        justifyContent="space-around"
         alignItems="center"
         wrap="wrap-reverse"
         spacing={10}
@@ -78,7 +78,7 @@ export default function CTASection2(props) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item md={6} lg={6} xl={5}>
+        <Grid item md={4} lg={4} xl={3}>
           <img alt="phone" src={phone} width="100%" />
         </Grid>
       </Grid>

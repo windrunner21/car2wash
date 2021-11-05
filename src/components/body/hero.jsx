@@ -27,6 +27,7 @@ export default function HeroSection(props) {
             height="100%"
             sx={{
               backgroundColor: "#f8f8fa",
+              borderBottomLeftRadius: isMobile ? 0 : 150,
               px: isMobile ? 5 : 10,
               py: isMobile ? 2 : 6,
             }}
@@ -43,6 +44,7 @@ export default function HeroSection(props) {
               sx={{
                 backgroundImage:
                   "linear-gradient(to bottom right, #8463d9, #9588d8, #db578d)",
+                borderTopRightRadius: 150,
                 px: 10,
                 py: 6,
               }}

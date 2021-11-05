@@ -21,12 +21,12 @@ export default function CTASection() {
       <Grid
         container
         direction="row"
-        justifyContent="center"
+        justifyContent="space-around"
         alignItems="center"
         wrap="wrap"
         spacing={10}
       >
-        <Grid item md={6} lg={6}>
+        <Grid item md={4} lg={4} xl={3}>
           <img alt="phone" src={phone} width="100%" />
         </Grid>
         <Grid item md={6} lg={6} xl={5}>
